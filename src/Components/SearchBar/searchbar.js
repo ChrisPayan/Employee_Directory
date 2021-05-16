@@ -2,7 +2,7 @@ import React from "react";
 
 function search({ handleInputChange }) {
     return (
-        <div className="form-group">
+        <div className="form-group d-flex justify-content-center">
 
             <input
                 onChange={handleInputChange}

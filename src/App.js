@@ -22,6 +22,18 @@ function App() {
       filteredUsers: newArr,
     })
   }
+  const handleSortName = (event) => {
+    event.preventDefault();
+    const newArr = employees.users.sort(function (a, b) {
+      if (a.name.first < b.name.first) { return -1; }
+      if (a.name.first > b.name.first) { return 1; }
+      return 0;
+    })
+    setEmployees({
+      ...employees,
+      filteredUsers: newArr,
+    })
+  }
 
   useEffect(() => {
     API.search()
@@ -48,20 +60,23 @@ function App() {
     <div>
       <Jumbotron />
       <SearchBar handleInputChange={handleInputChange} />
-      <table className="table table-striped table-dark">
-        <thead>
-          <tr>
-            <th scope="col">Image</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            <th scope="col">DOB</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Rows}
-        </tbody>
-      </table>
+      <div className="p-5">
+        <table className="table table-striped table-dark">
+          <thead>
+            <tr>
+              <th scope="col">Image </th>
+              <th scope="col">Name<button type="button" className="btn btn-link p-0 m-0" onClick={handleSortName}>🧰</button></th>
+              <th scope="col">Email<button type="button" className="btn btn-link p-0 m-0" onClick={handleSortName}>🧰</button></th>
+              <th scope="col">Phone</th>
+              <th scope="col">DOB</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Rows}
+          </tbody>
+        </table>
+      </div>
+
     </div>
 
   )
