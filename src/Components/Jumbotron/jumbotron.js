@@ -5,7 +5,7 @@ function Jumbotron() {
         <div className="jumbotron jumbotron-fluid">
             <div className="container">
                 <h1 className="display-4">Employee Directory</h1>
-                <p className="lead">Click on what ever you want it wont do shiiiiiiiiiiiiiit</p>
+                <p className="lead">Its a Jumbotron Yeah !</p>
             </div>
         </div>
     )
