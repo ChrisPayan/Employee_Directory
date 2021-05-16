@@ -14,19 +14,26 @@ function App() {
 
   const handleInputChange = (event) => {
     const input = event.target.value;
-
+    const newArr = employees.users.filter((foo) => {
+      return (foo.name.first + " " + foo.name.last).toLowerCase().includes(input.toLowerCase());
+    })
+    setEmployees({
+      ...employees,
+      filteredUsers: newArr,
+    })
   }
 
   useEffect(() => {
     API.search()
       .then((res) => {
-        setEmployees({ ...employees, users: res.data.results });
+        setEmployees({ ...employees, users: res.data.results, filteredUsers: res.data.results });
       });
   }, []);
+  let i = 0;
+  const Rows = employees.filteredUsers.map((user) => {
 
-  const Rows = employees.users.map((user) => {
     return (
-      <tr>
+      <tr key={i++}>
         <td><img src={user.picture.thumbnail} alt={user.name.first}></img></td>
         <td>{user.name.first + " " + user.name.last}</td>
         <td>{user.email}</td>
@@ -41,7 +48,7 @@ function App() {
     <div>
       <Jumbotron />
       <SearchBar handleInputChange={handleInputChange} />
-      <table class="table table-striped table-dark">
+      <table className="table table-striped table-dark">
         <thead>
           <tr>
             <th scope="col">Image</th>
